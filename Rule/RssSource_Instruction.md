@@ -11,10 +11,10 @@
 ------
 
 ### 1、语法说明
-  + 详见[书源规则](https://alanskycn.gitee.io/teachme/)
+  + 详见[书源规则](https://5tsv.github.io/teachme/Rule/source.html)
 
 ### 2、Legado的特殊规则
-  + 详见[书源规则](https://alanskycn.gitee.io/teachme/)
+  + 详见[书源规则](https://5tsv.github.io/teachme/Rule/source.html)
 
 ### 3、解析流程
 
@@ -28,7 +28,7 @@
 
   3. 解析`列表规则(ruleArticles)`
 
-     返回一个列表，`列表下一页规则(ruleArticles)`只在上拉时触发，且不存在页数`{{page}}`
+     返回一个列表，`列表下一页规则(ruleNextArticles)`只在上拉时触发，且不存在页数`{{page}}`
 
   4. 解析`标题规则(ruleTitle)`、`时间规则(rulePubDate)`、`图片url规则(ruleImage)`、`链接规则(ruleLink)`和`链接规则(ruleLink)`
 
@@ -48,11 +48,11 @@
 
   ▲ 有列表规则和描述规则的源
     - 特征：一定填写了`源名称(sourceName)`、`源URL(sourceUrl)`、`列表规则(ruleArticles)`、`标题规则(ruleTitle)`、`描述规则(ruleDescription)`和`链接规则(ruleLink)`。
-    - `列表下一页规则(ruleArticles)`根据实际需求来填写，不填也可以。`图标(sourceIcon)`和`源分组(sourceGroup)`可有可无，不影响解析。
+    - `列表下一页规则(ruleNextArticles)`根据实际需求来填写，不填也可以。`图标(sourceIcon)`和`源分组(sourceGroup)`可有可无，不影响解析。
 
   ▲ 有列表规则无描述规则的源
     - 特征：一定填写了`源名称(sourceName)`、`源URL(sourceUrl)`、`列表规则(ruleArticles)`、`标题规则(ruleTitle)`和`链接规则(ruleLink)`。
-    - `列表下一页规则(ruleArticles)`和`内容规则(ruleContent)`根据实际需求来填写，不填也可以。`图标(sourceIcon)`和`源分组(sourceGroup)`可有可无，不影响解析。
+    - `列表下一页规则(ruleNextArticles)`和`内容规则(ruleContent)`根据实际需求来填写，不填也可以。`图标(sourceIcon)`和`源分组(sourceGroup)`可有可无，不影响解析。
 
 ### 4、规则概述
 
@@ -70,7 +70,7 @@
 + 列表规则(ruleArticles)
     - 根据实际需求填写
     - 判断是否是标准RSS的标志
-+ 列表下一页规则(ruleArticles)
++ 列表下一页规则(ruleNextArticles)
     - 根据实际需求填写，一般和`列表规则(ruleArticles)`一起搭配使用
     - 规则解析的结果必须是字符串
     - 无页数`{{page}}`，想实现页数加一请使用JS
