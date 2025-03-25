@@ -1,0 +1,37 @@
+name: Sign
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'  # 每天运行一次，UTC时间0点
+
+jobs:
+  sign-date:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up OpenSSL
+        run: sudo apt-get install -y openssl
+
+      - name: Decode and save private key
+        run: echo "${{ secrets.PRIVATE_KEY }}" | base64 --decode > private_key.pem
+
+      - name: Generate current date
+        run: echo $(date -u +%Y%m%d) > date.txt
+
+      - name: Sign the date
+        run: |
+          openssl dgst -sha256 -sign private_key.pem -out date.sig date.txt
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          git add sign/date.txt sign/date.sig
+          git commit -m "Add signed date"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
