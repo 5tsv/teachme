@@ -17,7 +17,10 @@ jobs:
         run: sudo apt-get install -y openssl
 
       - name: Decode and save private key
-        run: echo "${{ secrets.PRIVATE_KEY }}" | base64 --decode > private_key.pem
+        run: |
+          echo "${{ secrets.PRIVATE_KEY }}" | base64 --decode > private_key.pem
+          ls -l private_key.pem
+          cat private_key.pem
 
       - name: 创建目标文件夹
         run: mkdir -p sign
