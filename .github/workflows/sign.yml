@@ -17,16 +17,13 @@ jobs:
         run: sudo apt-get install -y openssl
 
       - name: Decode and save private key
-        run: |
-          echo "-----BEGIN PRIVATE KEY-----" > private_key.pem
-          echo "${{ secrets.PRIVATE_KEY }}" | fold -w 64 >> private_key.pem
-          echo "-----END PRIVATE KEY-----" >> private_key.pem
+        run: echo "${{ secrets.PRIVATE_KEY }}" | base64 --decode > private_key.pem
 
       - name: 创建目标文件夹
         run: mkdir -p sign
 
       - name: Generate current date
-        run: echo $(date -u +%Y%m%d) > sign/date.txt
+        run: printf $(date -u +%Y%m%d) > sign/date.txt
 
       - name: 使用私钥签名日期并生成Hex格式
         run: |
