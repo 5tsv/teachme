@@ -18,9 +18,9 @@ jobs:
 
       - name: Decode and save private key
         run: |
-          echo "${{ secrets.PRIVATE_KEY }}" | base64 --decode > private_key.pem
-          ls -l private_key.pem
-          cat private_key.pem
+          echo "-----BEGIN PRIVATE KEY-----" > private_key.pem
+          echo "${{ secrets.PRIVATE_KEY }}" | fold -w 64 >> private_key.pem
+          echo "-----END PRIVATE KEY-----" >> private_key.pem
 
       - name: 创建目标文件夹
         run: mkdir -p sign
@@ -30,7 +30,7 @@ jobs:
 
       - name: 使用私钥签名日期并生成Hex格式
         run: |
-          openssl dgst -sha256 -sign private_key.pem -keyform PEM sign/date.txt | xxd -p > sign/date.sig
+          openssl dgst -sha256 -sign private_key.pem sign/date.txt | xxd -p > sign/date.sig
 
       - name: Commit and push changes
         run: |
