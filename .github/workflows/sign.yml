@@ -10,26 +10,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: 检出仓库
         uses: actions/checkout@v2
 
-      - name: Set up OpenSSL
+      - name: 安装OpenSSL
         run: sudo apt-get install -y openssl
 
-      - name: Decode and save private key
+      - name: 解码并保存私钥
         run: echo "${{ secrets.PRIVATE_KEY }}" | base64 --decode > private_key.pem
 
       - name: 创建目标文件夹
         run: mkdir -p sign
 
-      - name: Generate current date
+      - name: 生成当前日期
         run: printf $(date -u +%Y%m%d) > sign/date.txt
 
       - name: 使用私钥签名日期并生成Hex格式
         run: |
           openssl dgst -sha256 -sign private_key.pem sign/date.txt | xxd -p > sign/date.sig
 
-      - name: Commit and push changes
+      - name: 提交并推送更改
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
