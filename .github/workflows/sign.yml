@@ -25,10 +25,9 @@ jobs:
       - name: Generate current date
         run: echo $(date -u +%Y%m%d) > sign/date.txt
 
-      - name: 使用私钥签名日期并生成Base64格式
+      - name: 使用私钥签名日期并生成Hex格式
         run: |
-          openssl dgst -sha256 -sign private_key.pem -out sign/date.sha256 sign/date.txt
-          openssl base64 -in sign/date.sha256 -out sign/date.sig
+          openssl dgst -sha256 -sign private_key.pem -keyform PEM sign/date.txt | xxd -p > sign/date.sig
 
       - name: Commit and push changes
         run: |
