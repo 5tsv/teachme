@@ -27,13 +27,13 @@ jobs:
 
       - name: 使用私钥签名日期并生成Hex格式
         run: |
-          openssl dgst -sha256 -sign private_key.pem sign/date.txt | xxd -p > sign/date.sig
+          openssl dgst -sha256 -sign private_key.pem sign/date.txt | xxd -p > sign/datesign.txt
 
       - name: 提交并推送更改
         run: |
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
-          git add sign/date.txt sign/date.sig
+          git add sign/date.txt sign/datesign.txt
           git commit -m "Add signed date"
           git push
         env:
