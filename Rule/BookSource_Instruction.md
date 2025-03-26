@@ -62,7 +62,7 @@
     - 最好以 `@json:` 或 `$.` 开头，其他形式不可靠
     - 标准规范 [goessner JSONPath - XPath for JSON](https://goessner.net/articles/JsonPath/)
     - 实现库 [json-path/JsonPath](https://github.com/json-path/JsonPath)
-    - 在线测试 [Jayway JsonPath Evaluator](http://jsonpath.herokuapp.com/)
+    - 在线测试 [Jayway JsonPath Evaluator](https://sumiya.page/jpath.html)
    - 例子见最后的【书源三】的搜索页、目录页和正文页规则
 
   + XPath
