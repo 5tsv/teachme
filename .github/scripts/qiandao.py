@@ -6,7 +6,7 @@ from copy import copy
 
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse,quote
+from urllib.parse import urlparse
 import xml.etree.ElementTree as ET
 import time
 import logging
