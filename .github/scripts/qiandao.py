@@ -94,7 +94,7 @@ class bbsClient:
 
 if __name__ == '__main__':
 	try:
-		url = os.environ.get('HOSTNAME')
+		url = 'https://'+os.environ.get('HOSTNAME')
 		logger.info(f'{url}')
 		client = bbsClient(urlparse(url).hostname, os.environ.get('USERNAME'), os.environ.get('PASSWORD'))
 		client.login()
