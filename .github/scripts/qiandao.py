@@ -101,7 +101,7 @@ if __name__ == '__main__':
 		logger.info(f'{url}')
 		client = bbsClient(urlparse(url).hostname, os.environ.get('USERNAME'), os.environ.get('PASSWORD'))
 		result=client.invite()
-		logger.info(resultl)
+		logger.info(result.text)
 		client.login()
 		result = client.checkin()
 		logger.info(result)
