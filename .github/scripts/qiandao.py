@@ -92,7 +92,7 @@ class bbsClient:
 		checkinUrl=f'https://{self.hostname}/plugin.php?id=k_misign:sign&operation=qiandao&formhash={self.formhash}&inajax=1'
 		return self.session.get(checkinUrl).text
 	def invite(self):
-		requests.get(f'https://{self.hostname}/?fromuser={self.username}')
+		requests.get(f'https://{self.hostname}/',params={'fromuser':self.username})
 
 if __name__ == '__main__':
 	try:
