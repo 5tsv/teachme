@@ -11,6 +11,7 @@ jobs:
       HOSTNAME: ${{ secrets.HOSTNAME }}
       USERNAME: ${{ secrets.USERNAME }}
       PASSWORD: ${{ secrets.PASSWORD }}
+      UID: ${{ secrets.UID }}
 
     steps:
       - name: Check out repository code
