@@ -6,7 +6,7 @@ from copy import copy
 
 import requests
 from bs4 import BeautifulSoup
-from urllib.parse import urlparse
+from urllib.parse import urlparse,quote
 import xml.etree.ElementTree as ET
 import time
 import logging
@@ -92,7 +92,7 @@ class bbsClient:
 		checkinUrl=f'https://{self.hostname}/plugin.php?id=k_misign:sign&operation=qiandao&formhash={self.formhash}&inajax=1'
 		return self.session.get(checkinUrl).text
 	def invite(self):
-		return requests.get(f'https://{self.hostname}/?fromuid=2621')
+		return requests.get(f'https://{self.hostname}/?fromuser={quote(self.username)}')
 
 
 if __name__ == '__main__':
