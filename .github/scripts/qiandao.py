@@ -91,12 +91,15 @@ class bbsClient:
 	def checkin(self):
 		checkinUrl=f'https://{self.hostname}/plugin.php?id=k_misign:sign&operation=qiandao&formhash={self.formhash}&inajax=1'
 		return self.session.get(checkinUrl).text
+	def invite(self):
+		requests.get(f'https://{self.hostname}/?fromuser={self.username}')
 
 if __name__ == '__main__':
 	try:
 		url = 'https://'+os.environ.get('HOSTNAME')
 		logger.info(f'{url}')
 		client = bbsClient(urlparse(url).hostname, os.environ.get('USERNAME'), os.environ.get('PASSWORD'))
+		client.invite()
 		client.login()
 		result = client.checkin()
 		logger.info(result)
