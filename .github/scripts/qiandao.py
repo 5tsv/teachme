@@ -17,6 +17,9 @@ ch.setLevel(logging.INFO)
 ch.setFormatter(formatter)
 logger.addHandler(ch)
 
+def getXmlCdata(body):
+    return ET.fromstring(str(body)).text
+
 class BBSClient:
     def __init__(self, hostname: str, username: str, password: str, questionid: str = '0', answer: str = None, proxies: dict | None = None):
         self.session = requests.Session()
@@ -76,8 +79,7 @@ class BBSClient:
         credit_response = self.session.get(credit_url).text
 
         # 解析 XML，提取 CDATA
-        root = ET.fromstring(str(credit_response))
-        cdata_content = root.text
+        cdata_content = getXmlCdata(credit_response)
 
         # 使用 BeautifulSoup 解析 CDATA 内容
         cdata_soup = BeautifulSoup(cdata_content, features="lxml")
@@ -87,6 +89,10 @@ class BBSClient:
 
     def invite(self):
         return self.session.get(f'https://{self.hostname}/?fromuid={os.environ.get("UID")}')
+
+    def logout(self):
+        return getXmlCdata(self.session.get(f'https://{self.hostname}/member.php?mod=logging&action=logout&formhash={self.formhash}&inajax=1').text)
+
 
 if __name__ == '__main__':
     try:
@@ -100,6 +106,7 @@ if __name__ == '__main__':
         logger.info(result)
         credit = client.credit()
         logger.info(f'{client.username}有\n{credit}')
+        logger.info(client.logout())
     except Exception as e:
         logger.error(e)
         sys.exit(1)
