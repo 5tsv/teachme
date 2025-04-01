@@ -38,7 +38,7 @@ class BBSClient:
 
     def login_form_hash(self):
         response = self.session.get(f'https://{self.hostname}/member.php?mod=logging&action=login').text
-        loginhash = re.search(r'<div id="main_message_(.+?)">', response).group(1)
+        loginhash = re.search(r'<div id="main_messaqge_(.+?)">', response).group(1)
         formhash = re.search(r'<input type="hidden" name="formhash" value="(.+?)" />', response).group(1)
         return loginhash, formhash
 
