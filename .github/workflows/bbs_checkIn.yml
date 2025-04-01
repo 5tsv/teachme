@@ -12,6 +12,8 @@ jobs:
       USERNAME: ${{ secrets.USERNAME }}
       PASSWORD: ${{ secrets.PASSWORD }}
       UID: ${{ secrets.UID }}
+      SOUSHUBA_USERNAME: ${{ secrets.SOUSHUBA_USERNAME }}
+      SOUSHUBA_HOSTNAME: ${{ secrets.SOUSHUBA_HOSTNAME }}
 
     steps:
       - name: Check out repository code
