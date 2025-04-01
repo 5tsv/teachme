@@ -2,7 +2,7 @@ name: Run bbs qiandao
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 20 * * *' # 每天00:01运行一次
+    - cron: '0 20 * * *' # 每天04:00运行一次
 
 jobs:
   run:
