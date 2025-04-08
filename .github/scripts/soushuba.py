@@ -101,11 +101,11 @@ class SouShuBaClient:
         }
 
         resp = self.session.post(login_url, proxies=self.proxies, data=payload, headers=headers)
-        logger.info(resp.text)
-        if resp.status_code == 200:
+        if resp.status_code == 200 and re.search(self.username,resp.text):
             logger.info(f'Welcome {self.username}!')
         else:
-            raise ValueError('Verify Failed! Check your username and password!')
+            logger.error(resp.text)
+            raise ValueError('Login Failed!')
 
     def credit(self):
         credit_url = f"https://{self.hostname}/home.php?mod=spacecp&ac=credit&showcredit=1&inajax=1&ajaxtarget=extcreditmenu_menu"
@@ -163,12 +163,9 @@ if __name__ == '__main__':
                                 os.environ.get('SOUSHUBA_USERNAME'),
                                 os.environ.get('PASSWORD'))
         client.login()
-        client.credit()
-        '''
         client.space()
         credit = client.credit()
         logger.info(f'{client.username} have {credit} coins!')
-        '''
     except Exception as e:
         logger.error(e)
         sys.exit(1)
