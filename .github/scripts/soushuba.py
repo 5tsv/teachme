@@ -117,6 +117,7 @@ class SouShuBaClient:
     def credit(self):
         credit_url = f"https://{self.hostname}/home.php?mod=spacecp&ac=credit&showcredit=1&inajax=1&ajaxtarget=extcreditmenu_menu"
         credit_rst = self.session.get(credit_url).text
+        logger.info(credit_rst)
 
         # 解析 XML，提取 CDATA
         root = ET.fromstring(str(credit_rst))
@@ -141,9 +142,9 @@ class SouShuBaClient:
         headers["origin"] = f'https://{self.hostname}'
         headers["referer"] = f'https://{self.hostname}/home.php'
 
-        for x in range(2):
+        for x in range(5):
             payload = {
-                "message": "每天开心赚银币第 {0} 次".format(x + 4).encode("GBK"),
+                "message": "开心赚银币第 {0} 次".format(x + 1).encode("GBK"),
                 "addsubmit": "true",
                 "spacenote": "true",
                 "referer": "home.php",
@@ -170,7 +171,7 @@ if __name__ == '__main__':
                                 os.environ.get('SOUSHUBA_USERNAME'),
                                 os.environ.get('PASSWORD'))
         client.login()
-        client.space()
+        #client.space()
         credit = client.credit()
         logger.info(f'{client.username} have {credit} coins!')
     except Exception as e:
