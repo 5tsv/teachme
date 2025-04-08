@@ -135,7 +135,7 @@ class SouShuBaClient:
 
         for x in range(5):
             payload = {
-                "message": "开心赚银币 {0} 次".format(x + 1).encode("GBK"),
+                "message": "每天开心赚银币第 {0} 次".format(x + 1).encode("GBK"),
                 "addsubmit": "true",
                 "spacenote": "true",
                 "referer": "home.php",
@@ -148,6 +148,8 @@ class SouShuBaClient:
                     time.sleep(120)
             else:
                 logger.warning(f'{self.username} post {x + 1}nd failed!')
+                logger.warning(resp.text)
+                raise ValueError("test")
 
 
 if __name__ == '__main__':
