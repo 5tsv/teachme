@@ -110,7 +110,7 @@ class SouShuBaClient:
             # 解析成字典
             cookie_dict = dict(item.strip().split("=", 1) for item in cookie_str.split(";"))
             # 初始化一个session
-            self.session=requests.Session()
+            self.session.cookies.clear()
             # 设置自定义cookie 到 session 中
             self.session.cookies.update(cookie_dict)
 
@@ -156,7 +156,7 @@ class SouShuBaClient:
                     time.sleep(120)
             else:
                 logger.warning(f'{self.username} post {x + 1}nd failed!')
-                logger.warning(ET.fromstring(resp.text).text)
+                logger.warning(resp.text)
 
 
 if __name__ == '__main__':
