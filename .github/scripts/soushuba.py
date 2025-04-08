@@ -105,13 +105,14 @@ class SouShuBaClient:
             logger.info(f'Welcome {self.username}!')
         else:
             logger.error(resp.text)
-            # 登录失败，设置自定义cookie 到 session 中
+            # 登录失败，使用自定义cookie
             cookie_str = os.environ.get("SOUSHUBA_COOKIE")
             # 解析成字典
             cookie_dict = dict(item.strip().split("=", 1) for item in cookie_str.split(";"))
+            # 初始化一个session
             self.session=requests.Session()
+            # 设置自定义cookie 到 session 中
             self.session.cookies.update(cookie_dict)
-            logger.info(self.credit())
 
     def credit(self):
         credit_url = f"https://{self.hostname}/home.php?mod=spacecp&ac=credit&showcredit=1&inajax=1&ajaxtarget=extcreditmenu_menu"
