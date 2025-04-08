@@ -106,9 +106,10 @@ class SouShuBaClient:
         else:
             logger.error(resp.text)
             # 登录失败，设置自定义cookie 到 session 中
-            cookie_str = "yj0M_2e81_saltkey=J8jQqQJH;yj0M_2e81_lastvisit=1743535009;PHPSESSID=o9aiuomt9pcntadlmvp4cj06j9;yj0M_2e81_auth=55b34gafSYJSKBlnPfd64YQfAv6B4fClnEhA7HcDcVhMOIXsKv97UTAHzzoDbh4GBhiiCWhZrOkBbixMdxDUaApmpOc;yj0M_2e81_lastcheckfeed=771011%7C1743538626;yj0M_2e81_nofavfid=1;yj0M_2e81_home_diymode=1;yj0M_2e81_sid=0;yj0M_2e81_smile=1D1;yj0M_2e81_st_p=771011%7C1744146743%7Cb936aed1f30d8c82cc378996a7865546;yj0M_2e81_viewid=tid_1170497;yj0M_2e81_st_t=771011%7C1744146846%7Cb9960fed6ae595632d9f15304378308f;yj0M_2e81_forum_lastvisit=D_55_1744146846;yj0M_2e81_home_readfeed=1744147160;yj0M_2e81_ulastactivity=1744149191%7C0;yj0M_2e81_sendmail=1;yj0M_2e81_lastact=1744149243%09home.php%09spacecp;yj0M_2e81_checkpm=1"#os.environ.get("SOUSHUBA_COOKIE")
+            cookie_str = os.environ.get("SOUSHUBA_COOKIE")
             # 解析成字典
             cookie_dict = dict(item.strip().split("=", 1) for item in cookie_str.split(";"))
+            self.session=requests.Session()
             self.session.cookies.update(cookie_dict)
             logger.info(self.credit())
 
