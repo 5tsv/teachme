@@ -101,6 +101,7 @@ class SouShuBaClient:
         }
 
         resp = self.session.post(login_url, proxies=self.proxies, data=payload, headers=headers)
+        logger.info(resp.text)
         if resp.status_code == 200:
             logger.info(f'Welcome {self.username}!')
         else:
@@ -148,8 +149,7 @@ class SouShuBaClient:
                     time.sleep(120)
             else:
                 logger.warning(f'{self.username} post {x + 1}nd failed!')
-                logger.warning(resp.text)
-                raise ValueError("test")
+                logger.warning(ET.fromstring(resp.text).text)
 
 
 if __name__ == '__main__':
@@ -163,9 +163,12 @@ if __name__ == '__main__':
                                 os.environ.get('SOUSHUBA_USERNAME'),
                                 os.environ.get('PASSWORD'))
         client.login()
+        client.credit()
+        '''
         client.space()
         credit = client.credit()
         logger.info(f'{client.username} have {credit} coins!')
+        '''
     except Exception as e:
         logger.error(e)
         sys.exit(1)
