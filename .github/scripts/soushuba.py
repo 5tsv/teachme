@@ -141,9 +141,9 @@ class SouShuBaClient:
         headers["origin"] = f'https://{self.hostname}'
         headers["referer"] = f'https://{self.hostname}/home.php'
 
-        for x in range(5):
+        for x in range(2):
             payload = {
-                "message": "每天开心赚银币第 {0} 次".format(x + 1).encode("GBK"),
+                "message": "每天开心赚银币第 {0} 次".format(x + 4).encode("GBK"),
                 "addsubmit": "true",
                 "spacenote": "true",
                 "referer": "home.php",
