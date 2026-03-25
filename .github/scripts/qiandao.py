@@ -109,4 +109,4 @@ if __name__ == '__main__':
         logger.info(client.logout())
     except Exception as e:
         logger.error(e)
-        sys.exit(1)
+        #sys.exit(1)
